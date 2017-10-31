@@ -154,7 +154,7 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
   G4cout.precision(6);       
   G4cout << "\n Projected Range        = "<< G4BestUnit(fProjRange,"Length")
          << "   rms = "            << G4BestUnit( rms,"Length");
-  G4cout <<   "\n Range                = "<< G4BestUnit(fTRange,"Length")
+  G4cout << "\n Range                  = "<< G4BestUnit(fTRange,"Length")
          << "   rms = "            << G4BestUnit( rms_rt,"Length");
 
   G4cout << "\n Track Length (with MS) = "<< G4BestUnit(fTotalRange,"Length")
