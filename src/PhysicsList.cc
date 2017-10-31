@@ -259,6 +259,7 @@ void PhysicsList::AddPhysicsList(const G4String& name)
     fEmName = name;
     delete fEmPhysicsList;
     fEmPhysicsList = new MyEmStandardPhysics_option3(verboseLevel);
+    //    AddIonGasModels();
     
   } else if (name == "myemhad") {
     G4PhysListFactory factory;
@@ -277,6 +278,7 @@ void PhysicsList::AddPhysicsList(const G4String& name)
     delete fEmPhysicsList;
     fEmPhysicsList = new MyEmStandardPhysics_option3(verboseLevel);
     phys->ReplacePhysics(fEmPhysicsList);
+    //    AddIonGasModels();
     
   } else {
     G4PhysListFactory factory;
@@ -294,6 +296,7 @@ void PhysicsList::AddPhysicsList(const G4String& name)
 	   << " via G4PhysListFactory"
 	   << G4endl;
   }
+  AddIonGasModels();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
