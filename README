@@ -5,13 +5,13 @@ $Id: README 93675 2015-10-28 09:59:23Z gcosmo $
      Geant4 - an Object-Oriented Toolkit for Simulation in HEP
      =========================================================
 
-                            TestEm7 
-                            -------
+                   IonRange (based on TestEm7) 
+                   ---------------------------
 
-     How to produce a Bragg curve in a water phantom.
-     How to compute the dose in 'test volumes' called tallies.
-     How to define a maximum step size.
-	
+ to compute range of low energy ions in a gas
+ ![alt text](./plot.png)
+ plot made with `C12.mac` and `plot.gp`
+
  1- GEOMETRY DEFINITION
  
      The geometry consists of a single block of a homogenous material,
