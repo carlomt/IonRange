@@ -242,6 +242,35 @@ G4Material* DetectorConstruction::DefineHeCF4(const G4double pressure, const G4d
   return Mixture;
 }
 
+G4Material* DetectorConstruction::DefineHeCF4SF6(const G4double pressure, const G4double temperature, const G4double fraction_He, const G4double fraction_CF4, const G4double fraction_SF6)
+{
+  G4Element* He = new G4Element("Helium",  "He", 2,  4.0026*g/mole);
+  G4Element* C  = new G4Element("Carbon",   "C", 6,  12.011*g/mole);
+  G4Element* F  = new G4Element("Fluorine", "F", 9,  18.998*g/mole);
+  G4Element* S  = new G4Element("Sulfur",   "S", 16, 32.065*g/mole);
+
+  G4double reference_pressure = 1.*bar;
+  G4double reference_temperature = 288.15*kelvin;
+  
+  // densities at reference p and T
+  G4double rho_CF4 = 3.72 *kg/m3;
+  G4double rho_He  = 0.1786 *kg/m3;
+  G4double rho_SF6 = 6.17 *kg/m3;
+
+  G4double density     = ( rho_CF4*fraction_CF4 + rho_He*fraction_He +rho_SF6*fraction_SF6)
+    *pressure/reference_pressure * reference_temperature/temperature;
+
+  G4Material* Mixture = new G4Material( "HeCF4SF6", density, 4, kStateGas, temperature, pressure);
+  Mixture->AddElement(He, fraction_He);
+  Mixture->AddElement(C,  fraction_CF4*1./5);
+  Mixture->AddElement(F,  fraction_CF4*4./5 + fraction_SF6*6./7);
+  Mixture->AddElement(S,  fraction_SF6*1./7);
+  
+  fAbsorMaterial = Mixture;
+    
+  return Mixture;
+}
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
   

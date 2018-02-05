@@ -175,7 +175,7 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
   //append range to txt file
   std::ofstream outfile;
   outfile.open("ranges.txt", std::ios_base::app);
-  outfile << energy/keV << "\t"
+  outfile << energy/keV << "\t\t"
 	  << fProjRange/mm  << "\t" << rms/mm << "\t"
 	  << fTRange/mm << "\t" << rms_rt/mm << "\t"
 	  << std::endl; 

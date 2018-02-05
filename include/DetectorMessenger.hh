@@ -66,6 +66,7 @@ private:
   G4UIcmdWithADoubleAndUnit* fSF6Cmd;
   G4UIcmdWithADoubleAndUnit* fHeCF4Cmd;
   G4UIcmdWithADoubleAndUnit* fMixtCmd;
+  G4UIcmdWithADoubleAndUnit* fHeCF4SF6Cmd;  
   G4UIcmdWithAString*        fWMaterCmd;
   G4UIcmdWithADoubleAndUnit* fSizeXCmd;
   G4UIcmdWithADoubleAndUnit* fSizeYZCmd;    

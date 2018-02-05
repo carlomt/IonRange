@@ -91,6 +91,13 @@ DetectorMessenger::DetectorMessenger(DetectorConstruction * Det)
   fMixtCmd->SetRange("pressure>0.");
   fMixtCmd->SetUnitCategory("Pressure");
   fMixtCmd->AvailableForStates(G4State_PreInit);
+
+  fHeCF4SF6Cmd = new G4UIcmdWithADoubleAndUnit("/testem/det/setHeCF4SF6pressure",this);
+  fHeCF4SF6Cmd->SetGuidance("Set HeCF4SF6 and its pressure.");
+  fHeCF4SF6Cmd->SetParameterName("pressure",false);
+  fHeCF4SF6Cmd->SetRange("pressure>0.");
+  fHeCF4SF6Cmd->SetUnitCategory("Pressure");
+  fHeCF4SF6Cmd->AvailableForStates(G4State_PreInit);
   
   fWMaterCmd = new G4UIcmdWithAString("/testem/det/setWorldMat",this);
   fWMaterCmd->SetGuidance("Select material of the world.");
@@ -197,6 +204,7 @@ DetectorMessenger::~DetectorMessenger()
   delete fSF6Cmd;
   delete fHeCF4Cmd;  
   delete fMixtCmd;
+  delete fHeCF4SF6Cmd;  
   delete fWMaterCmd;
   delete fSizeXCmd;
   delete fSizeYZCmd; 
@@ -262,7 +270,11 @@ void DetectorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
   if (command == fMixtCmd)
     {
       fDetector->DefineMixture(fMixtCmd->GetNewDoubleValue(newValue));
-    }  
+    }
+  if (command == fHeCF4SF6Cmd)
+    {
+      fDetector->DefineHeCF4SF6(fHeCF4SF6Cmd->GetNewDoubleValue(newValue));
+    }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
