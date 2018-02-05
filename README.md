@@ -15,26 +15,26 @@ $Id: README 93675 2015-10-28 09:59:23Z gcosmo $
  plot made with `C12.mac` and `plot.gp`
 
  1- GEOMETRY DEFINITION
- 
-     The geometry consists of a single block of a homogenous material,
-     placed in a world.
-     	
-     Three parameters define the geometry :
- 	- the material of the box,
-	- the thickness of the box (sizeX),
-	- the transverse dimension of the box (sizeYZ).
+
+ The geometry consists of a single block of a homogenous material,
+ placed in a world.
+    	
+ Three parameters define the geometry :
+ - the material of the box,
+ - the thickness of the box (sizeX),
+ - the transverse dimension of the box (sizeYZ).
 	
-     The default is 20 cm of water.
-     	 	
-     In addition a transverse uniform magnetic field can be applied.
+ The default is 20 cm of water.
+ 	 	
+ In addition a transverse uniform magnetic field can be applied.
  	
-     The default geometry is constructed in DetectorConstruction class,
-     but all of the above parameters can be changed interactively via
-     the commands defined in the DetectorMessenger class.
-     
-     The size, matter, positions of several test-volumes (tallies) can be
-     defined via UI commands : /testem/det/tally...    
- 	
+ The default geometry is constructed in DetectorConstruction class,
+ but all of the above parameters can be changed interactively via
+ the commands defined in the DetectorMessenger class.
+ 
+ The size, matter, positions of several test-volumes (tallies) can be
+ defined via UI commands : /testem/det/tally...    
+	
  2- PHYSICS LIST
  
  Physics lists can be local (eg. in this example) or from G4 kernel
