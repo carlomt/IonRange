@@ -9,7 +9,7 @@ $Id: README 93675 2015-10-28 09:59:23Z gcosmo $
                    ---------------------------
 
  to compute range of low energy ions in a gas
- ![alt text](./plot.png)
+ ![alt text](https://raw.githubusercontent.com/carlomt/IonRange/master/plot.png)
  plot made with `C12.mac` and `plot.gp`
 
  1- GEOMETRY DEFINITION
