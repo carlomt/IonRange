@@ -83,7 +83,7 @@ public:
   G4Material*         DefineSF6(const G4double pressure, const G4double temperature = 273);
   G4Material*         DefineMixture(const G4double pressure, const G4double temperature = 273);
   G4Material*         DefineHeCF4(const G4double pressure, const G4double temperature = 273, const G4double fraction_He=.6, const G4double fraction_CF4=.4);
-  G4Material*         DefineHeCF4SF6(const G4double pressure, const G4double temperature = 273, const G4double fraction_He =.7, const G4double fraction_CF4=.29, const G4double fraction_SF6=.01);  
+  G4Material*         DefineHeCF4SF6(const G4double pressure, const G4double temperature = 273.15+20, const G4double fraction_He =.8, const G4double fraction_CF4=.19, const G4double fraction_SF6=.01);  
   
 private:
 

@@ -249,11 +249,19 @@ G4Material* DetectorConstruction::DefineHeCF4SF6(const G4double pressure, const 
   G4Element* F  = new G4Element("Fluorine", "F", 9,  18.998*g/mole);
   G4Element* S  = new G4Element("Sulfur",   "S", 16, 32.065*g/mole);
 
+  // G4double reference_pressure = 1.*bar;
+  // G4double reference_temperature = 288.15*kelvin;
+  
+  // // densities at reference p and T
+  // G4double rho_CF4 = 3.72 *kg/m3;
+  // G4double rho_He  = 0.1786 *kg/m3;
+  // G4double rho_SF6 = 6.17 *kg/m3;
+
   G4double reference_pressure = 1.*bar;
-  G4double reference_temperature = 288.15*kelvin;
+  G4double reference_temperature = 273.15*kelvin;
   
   // densities at reference p and T
-  G4double rho_CF4 = 3.72 *kg/m3;
+  G4double rho_CF4 = 3.93 *kg/m3;
   G4double rho_He  = 0.1786 *kg/m3;
   G4double rho_SF6 = 6.17 *kg/m3;
 
