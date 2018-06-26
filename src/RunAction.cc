@@ -54,7 +54,8 @@ RunAction::RunAction(DetectorConstruction* det, PhysicsList* phys,
  : G4UserRunAction(),
    fAnalysisManager(0), fDetector(det), fPhysics(phys), fKinematic(kin),
    fTallyEdep(new G4double[kMaxTally]), fProjRange(0.), fProjRange2(0.),
-   fTotalRange(0), fTotalRange2(0),fOrtRange(0.),fTRange(0.),
+   fOrtRange(0.),fTRange(0.),
+   fTotalRange(0), fTotalRange2(0),
    fEdeptot(0.), fEniel(0.), fNbPrimarySteps(0), fRange(0)
 { 
   // Book predefined histograms
@@ -212,12 +213,20 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
   if (fAnalysisManager->IsActive() ) {        
     // normalize histograms
     //
-    for (G4int j=1; j<3; ++j) {  
-      G4double binWidth = fAnalysisManager->GetH1Width(j);
-      G4double fac = (mm/MeV)/(nbofEvents * binWidth);
-      fAnalysisManager->ScaleH1(j, fac);
-    }
-    fAnalysisManager->ScaleH1(3, 1./nbofEvents);
+    for (G4int j=1; j<3; ++j)
+      {  
+	G4double binWidth = fAnalysisManager->GetH1Width(j);
+	G4double fac = (mm/keV)/(nbofEvents * binWidth);
+	fAnalysisManager->ScaleH1(j, fac);
+      }
+    
+    for (G4int j=3; j<5; ++j)
+      {  
+	// G4double binWidth = fAnalysisManager->GetH1Width(j);
+	G4double fac = 1./(nbofEvents);
+	fAnalysisManager->ScaleH1(j, fac);
+      }
+    
 
     // G4double binWidth = fAnalysisManager->GetH2XWidth(0) * fAnalysisManager->GetH2YWidth(0);
     // G4double fac = (mm*mm/keV)/(nbofEvents * binWidth);
@@ -249,37 +258,44 @@ void RunAction::BookHisto()
   fAnalysisManager->SetActivation(true);  // enable inactivation of histograms
 
   // Define histograms start values
-  const G4int kMaxHisto = 4;
-  const G4String id[] = { "h0", "h1", "h2", "h3" };
+  const G4int kMaxHisto = 5;
+  const G4String id[] = { "h0", "h1", "h2", "h3", "h4" };
   const G4String title[] = 
                 { "dummy",                                      //0
-                  "Edep (MeV/mm) along absorber ",              //1
-                  "Edep (MeV/mm) along absorber zoomed",        //2
-                  "projectile range"                            //3
+                  "Edep [keV/mm] along absorber ",              //1
+                  "Edep [keV/mm] along absorber zoomed",        //2
+                  "projectile range",                           //3
+		  "Ek  [keV]"                                   //4
                  };  
 
   // Default values (to be reset via /analysis/h1/set command)               
   G4int nbins = 100;
   G4double vmin = 0.;
   G4double vmax = 100.;
+  G4bool activ = false;
 
   // Create all histograms as inactivated 
   // as we have not yet set nbins, vmin, vmax
   for (G4int k=0; k<kMaxHisto; ++k) {
     G4int ih = fAnalysisManager->CreateH1(id[k], title[k], nbins, vmin, vmax);
-    G4bool activ = false;
     if (k == 1) activ = true;
     fAnalysisManager->SetH1Activation(ih, activ);
   }
-  G4int ih = fAnalysisManager->CreateH2("h4", "Edep transverse plane",
+  G4int ih = fAnalysisManager->CreateH2("h5", "Edep transverse plane",
   					2*100+1, -100.5, 100.5,
   					2*100+1, -100.5, 100.5 );
   G4cout << "2d histo id: "<< ih <<G4endl;
   fAnalysisManager->SetH2Activation(ih, true);
 
-  ih = fAnalysisManager->CreateH2("h5", "Edep parallel plane",
+  ih = fAnalysisManager->CreateH2("h6", "Edep parallel plane",
   					101, -0.5, 100.5,
   					2*100+1, -100.5, 100.5 );
+  G4cout << "2d histo id: "<< ih <<G4endl;
+  fAnalysisManager->SetH2Activation(ih, true);
+
+  ih = fAnalysisManager->CreateH2("h7", "E-pos",
+  					nbins, 0, 3,
+  				        nbins, 0, 1.e+3 );
   G4cout << "2d histo id: "<< ih <<G4endl;
   fAnalysisManager->SetH2Activation(ih, true);
 }
